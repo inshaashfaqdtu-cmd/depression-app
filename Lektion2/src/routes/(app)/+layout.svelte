@@ -20,8 +20,12 @@
 		goto('/brugerinfo');
 	}
 
-	function logout() {
-		goto('/');
+	async function logout() {
+		await fetch('/api/logout', {
+			method: 'POST'
+		});
+
+		goto('/login');
 	}
 </script>
 
