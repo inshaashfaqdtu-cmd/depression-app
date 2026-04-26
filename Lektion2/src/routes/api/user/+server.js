@@ -12,6 +12,8 @@ export async function GET() {
 			status: 200
 		});
 	} catch (error) {
+		console.error('GET USERS ERROR:', error);
+
 		return new Response(JSON.stringify({ error: 'Kunne ikke hente brugere' }), {
 			status: 500
 		});
@@ -39,9 +41,17 @@ export async function POST({ request }) {
 			status: 201
 		});
 	} catch (error) {
-		return new Response(JSON.stringify({ error: 'Kunne ikke oprette bruger' }), {
-			status: 500
-		});
+		console.error('CREATE USER ERROR:', error);
+
+		return new Response(
+			JSON.stringify({
+				error: 'Kunne ikke oprette bruger',
+				details: error.message
+			}),
+			{
+				status: 500
+			}
+		);
 	}
 }
 
@@ -61,6 +71,8 @@ export async function DELETE({ request }) {
 			status: 200
 		});
 	} catch (error) {
+		console.error('DELETE USER ERROR:', error);
+
 		return new Response(JSON.stringify({ error: 'Kunne ikke slette bruger' }), {
 			status: 500
 		});
